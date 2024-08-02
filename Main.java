@@ -1,34 +1,34 @@
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
 
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String str1 = scanner.nextLine();
-        String str2 = scanner.nextLine();
-
-        if (str1.length() == str2.length()){
-            ArrayList<Character> array = new ArrayList<>();
-                for (int i = 0; i < str1.length();i++){
-                    array.add(str1.charAt(i));
+        String str = scanner.next();
+        Stack<Character> st = new Stack<Character>();
+        for (int i = 0; i < str.length();i++){
+            char ch = str.charAt(i);
+            if (st.isEmpty()){
+                st.push(ch);
             }
-                for (int i = 0; i < str2.length();i++){
-                    Character c = str2.charAt(i);
-                    if (array.contains(c)){
-                        array.remove(c);
-                    }
-                }
-                if (array.isEmpty()){
-                    System.out.println("It´s an anagram");
-                }
-                else {
-                    System.out.println("It´s not an anagram!");
-                }
+            else if (ch == '{' || ch == '[' || ch == '('){
+                st.push(ch);
+            }
+            else if (ch == ')' && st.peek() == '('){
+                st.pop();
+            }
+            else if (ch == ']' && st.peek() == '['){
+                st.pop();
+            }
+            else if (ch == '}' && st.peek() == '{'){
+                st.pop();
+            }
         }
-        else {
-            System.out.println("Don´t even bother lol!");
+        if (st.isEmpty()){
+            System.out.println("yeah it´s a balanced string!");
+        }else {
+            System.out.println("no, it´s not a balanced string.");
         }
     }
 }
