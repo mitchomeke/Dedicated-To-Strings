@@ -1,34 +1,32 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-
-
+    /**
+     * PALINDROME STRINGS
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String str1 = scanner.nextLine();
-        String str2 = scanner.nextLine();
+        String input = scanner.nextLine().toUpperCase();
+        String reversed = "";
 
-        if (str1.length() == str2.length()){
-            ArrayList<Character> array = new ArrayList<>();
-                for (int i = 0; i < str1.length();i++){
-                    array.add(str1.charAt(i));
-            }
-                for (int i = 0; i < str2.length();i++){
-                    Character c = str2.charAt(i);
-                    if (array.contains(c)){
-                        array.remove(c);
-                    }
-                }
-                if (array.isEmpty()){
-                    System.out.println("It´s an anagram");
-                }
-                else {
-                    System.out.println("It´s not an anagram!");
-                }
+        StringBuilder builder = new StringBuilder();
+        int i = input.length()-1;
+        while(i >= 0){
+            builder.append(input.charAt(i));
+            i--;
         }
-        else {
-            System.out.println("Don´t even bother lol!");
+
+        reversed = builder.toString().toUpperCase();
+        for (int j = 0; j < input.length();j++){
+            if (input.charAt(j) != reversed.charAt(j)){
+                System.out.println("Not a palindrome");
+                break;
+            }
+            else {
+                System.out.println("It´s a Palindrome");
+                return;
+            }
         }
     }
 }
