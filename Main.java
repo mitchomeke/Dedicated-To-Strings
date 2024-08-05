@@ -1,34 +1,30 @@
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
-
-
+    /**
+     * IF STRINGS ARE A ROTATION OF EACH OTHER
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String str1 = scanner.nextLine();
-        String str2 = scanner.nextLine();
+        String input = scanner.nextLine();
+        String input2 = scanner.nextLine();
+        LinkedHashMap<String,Integer> map = new LinkedHashMap<>();
+        StringBuilder builder = new StringBuilder();
+        String c = "";
 
-        if (str1.length() == str2.length()){
-            ArrayList<Character> array = new ArrayList<>();
-                for (int i = 0; i < str1.length();i++){
-                    array.add(str1.charAt(i));
+        if (input.length() == input2.length()){
+            int length = input.length();
+            for (int i = 0; i < length;i++){
+                String a = input.substring(0,i+1);
+                String b = input.substring(i);
+                c = b+a;
+                if (c.contains(input2)){
+                    System.out.println("true");
+                    break;
+                }
             }
-                for (int i = 0; i < str2.length();i++){
-                    Character c = str2.charAt(i);
-                    if (array.contains(c)){
-                        array.remove(c);
-                    }
-                }
-                if (array.isEmpty()){
-                    System.out.println("It´s an anagram");
-                }
-                else {
-                    System.out.println("It´s not an anagram!");
-                }
-        }
-        else {
-            System.out.println("Don´t even bother lol!");
         }
     }
 }
