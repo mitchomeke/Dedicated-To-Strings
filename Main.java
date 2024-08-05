@@ -1,34 +1,23 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-
-
+    /**
+     * SORTING CHARACTERS IN DESCENDING ORDER OF THEIR FREQUENCY
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String str1 = scanner.nextLine();
-        String str2 = scanner.nextLine();
+        String input = scanner.nextLine();
 
-        if (str1.length() == str2.length()){
-            ArrayList<Character> array = new ArrayList<>();
-                for (int i = 0; i < str1.length();i++){
-                    array.add(str1.charAt(i));
-            }
-                for (int i = 0; i < str2.length();i++){
-                    Character c = str2.charAt(i);
-                    if (array.contains(c)){
-                        array.remove(c);
-                    }
-                }
-                if (array.isEmpty()){
-                    System.out.println("It´s an anagram");
-                }
-                else {
-                    System.out.println("It´s not an anagram!");
-                }
+        LinkedHashMap<Character,Integer> map = new LinkedHashMap<>();
+        for (Character ch : input.toCharArray()){
+            map.put(ch, map.getOrDefault(ch,0)+1);
         }
-        else {
-            System.out.println("Don´t even bother lol!");
+        List<Map.Entry<Character,Integer>> entryList = new ArrayList<>(map.entrySet());
+        entryList.sort((entry1,entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+        for (Map.Entry<Character,Integer> entry : entryList){
+         System.out.println("The frequency of character " + entry.getKey() + " is " + entry.getValue());
         }
     }
 }
